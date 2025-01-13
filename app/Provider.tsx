@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { ReactNode, useEffect, useState } from "react";
-
+import {ReactNode, useEffect, useState} from 'react';
+import './globals.css';
 
 interface ProviderProps {
-  children: ReactNode;
+	children: ReactNode;
 }
-export default function Provider({ children }: ProviderProps) {
-  return <MSWComponent>{children}</MSWComponent>;
+export default function Provider({children}: ProviderProps) {
+	return <MSWComponent>{children}</MSWComponent>;
 }
 
-export const MSWComponent = ({ children }: { children: React.ReactNode }) => {
-  const [mswReady, setMswReady] = useState(false);
+export const MSWComponent = ({children}: {children: React.ReactNode}) => {
+	const [mswReady, setMswReady] = useState(false);
 
-  useEffect(() => {
-    const init = async () => {
-      const { initMsw } = await import("__mocks__");
-      await initMsw();
-      setMswReady(true);
-    };
+	useEffect(() => {
+		const init = async () => {
+			const {initMsw} = await import('__mocks__');
+			await initMsw();
+			setMswReady(true);
+		};
 
-    if (!mswReady) {
-      init();
-    }
-  }, [mswReady]);
+		if (!mswReady) {
+			init();
+		}
+	}, [mswReady]);
 
-  if (!mswReady) return null;
+	if (!mswReady) return null;
 
-  return <>{children}</>;
+	return <>{children}</>;
 };
