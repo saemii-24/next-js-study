@@ -1,0 +1,21 @@
+{
+	"extends": [
+		"next/core-web-vitals",
+		"prettier",
+		"plugin:tailwindcss/recommended",
+		"plugin:react-hooks/recommended"
+	],
+	"settings": {
+		"tailwindcss": {
+			"config": "tailwind.config.ts",
+			"callees": ["classnames", "clsx", "twMerge", "cn", "cva"]
+		}
+	},
+	"rules": {
+		"tailwindcss/classnames-order": "warn",
+		"tailwindcss/enforces-negative-arbitrary-values": "warn",
+		"tailwindcss/enforces-shorthand": "warn",
+		"tailwindcss/no-contradicting-classname": "warn",
+		"react-hooks/rules-of-hooks": "error"
+	}
+}
