@@ -1,82 +1,96 @@
 'use client';
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 const TouchClick = () => {
-	const [log, setLog] = useState<string[]>([]);
+	const [position, setPosition] = useState({x: 50, y: 50});
+	const [isDragging, setIsDragging] = useState(false);
 
-	// 이벤트 상태
-	const [isTouchStart, setTouchStart] = useState(false);
-	const [isTouchMove, setTouchMove] = useState(false);
-	const [isTouchEnd, setTouchEnd] = useState(false);
-	const [isTouchCancel, setTouchCancel] = useState(false);
-	const [isClick, setClick] = useState(false);
-	const [isMouseDown, setMouseDown] = useState(false);
-	const [isMouseUp, setMouseUp] = useState(false);
+	const containerRef = useRef<HTMLDivElement>(null);
+	const buttonSize = 80; // 버튼 크기 (px)
 
 	// 상태 및 로그 초기화
 	const clearLog = () => {
-		setLog([]);
-		setTouchStart(false);
-		setTouchMove(false);
-		setTouchEnd(false);
-		setTouchCancel(false);
-		setClick(false);
-		setMouseDown(false);
-		setMouseUp(false);
+		setPosition({x: 50, y: 50});
+		setIsDragging(false);
 	};
 
-	// 이벤트 핸들러
-	const handleEvent = (
-		eventName: string,
-		setState: React.Dispatch<React.SetStateAction<boolean>>,
+	// 드래그 시작
+	const handleDragStart = (
+		event:
+			| React.MouseEvent<HTMLButtonElement>
+			| React.TouchEvent<HTMLButtonElement>,
 	) => {
-		setState(true);
-		setLog((prev) => [...prev, eventName]);
+		event.preventDefault();
+		setIsDragging(true);
+	};
+
+	// 드래그 중
+	const handleDragMove = (
+		event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+	) => {
+		if (!isDragging) return;
+
+		// clientX와 clientY 추출
+		let clientX: number, clientY: number;
+
+		if ('touches' in event) {
+			// TouchEvent인 경우
+			clientX = event.touches[0].clientX;
+			clientY = event.touches[0].clientY;
+		} else {
+			// MouseEvent인 경우
+			clientX = event.clientX;
+			clientY = event.clientY;
+		}
+
+		const container = containerRef.current;
+		if (container) {
+			const rect = container.getBoundingClientRect();
+
+			// 부모 컴포넌트 경계 내에서만 위치를 업데이트 (버튼 크기 고려)
+			const x = Math.min(
+				Math.max(clientX - rect.left, buttonSize / 2),
+				rect.width - buttonSize / 2,
+			);
+			const y = Math.min(
+				Math.max(clientY - rect.top, buttonSize / 2),
+				rect.height - buttonSize / 2,
+			);
+
+			setPosition({x, y});
+		}
+	};
+
+	// 드래그 종료
+	const handleDragEnd = () => {
+		setIsDragging(false);
 	};
 
 	return (
-		<div className='p-4'>
-			<div>
-				<span className='font-bold'>Click, Mouse Events</span>
-				<ul className='mt-2 list-disc pl-6'>
-					<li>{isClick ? 'click' : ''}</li>
-					<li>{isMouseDown ? 'mouseDown' : ''}</li>
-					<li>{isMouseUp ? 'mouseUp' : ''}</li>
-				</ul>
-				<span className='font-bold'>Touch Events (Mobile)</span>
-				<ul className='mt-2 list-disc pl-6'>
-					<li>{isTouchStart ? 'touchStart' : ''}</li>
-					<li>{isTouchMove ? 'touchMove' : ''}</li>
-					<li>{isTouchEnd ? 'touchEnd' : ''}</li>
-					<li>{isTouchCancel ? 'touchCancel' : ''}</li>
-				</ul>
+		<div className='mt-6'>
+			{/* 부모 컴포넌트 */}
+			<div
+				ref={containerRef}
+				className='relative h-60 w-full rounded border border-gray-300 bg-gray-100'
+				onMouseMove={(e) => handleDragMove(e)}
+				onTouchMove={(e) => handleDragMove(e)}
+				onMouseUp={handleDragEnd}
+				onTouchEnd={handleDragEnd}
+				onMouseLeave={handleDragEnd}>
+				{/* 드래그 가능한 버튼 */}
+				<button
+					style={{
+						position: 'absolute',
+						top: `${position.y}px`,
+						left: `${position.x}px`,
+						transform: 'translate(-50%, -50%)',
+						width: `${buttonSize}px`,
+						height: `${buttonSize}px`,
+					}}
+					onMouseDown={(e) => handleDragStart(e)}
+					onTouchStart={(e) => handleDragStart(e)}
+					className='rounded-md border border-gray-300 bg-white p-4 text-center transition hover:bg-blue-500'></button>
 			</div>
-			<button
-				onTouchStart={() => handleEvent('touchStart', setTouchStart)}
-				onTouchMove={() => handleEvent('touchMove', setTouchMove)}
-				onTouchEnd={() => handleEvent('touchEnd', setTouchEnd)}
-				onTouchCancel={() => handleEvent('touchCancel', setTouchCancel)}
-				onClick={() => handleEvent('click', setClick)}
-				onMouseDown={() => handleEvent('mouseDown', setMouseDown)}
-				onMouseUp={() => handleEvent('mouseUp', setMouseUp)}
-				className='bg-red-50 p-4 m-2 border border-gray-300 rounded w-full md:w-auto text-center'>
-				이벤트 확인 버튼
-			</button>
-
-			<button
-				onClick={clearLog}
-				className='bg-blue-50 p-4 m-2 border border-gray-300 rounded w-full md:w-auto text-center'>
-				로그 초기화
-			</button>
-
-			<h2 className='mt-4 font-bold'>이벤트 순서:</h2>
-			<ul className='mt-2 list-disc pl-6'>
-				{log.length === 0 ? (
-					<li className='text-gray-500'>이벤트가 발생하지 않았습니다.</li>
-				) : (
-					log.map((entry, index) => <li key={index}>{entry}</li>)
-				)}
-			</ul>
 		</div>
 	);
 };

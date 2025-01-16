@@ -6,9 +6,9 @@ export const metadata = {
 
 export default function Page() {
 	return (
-		<h1 className='bg-red-50 text-red-800'>
-			버튼
+		<div>
+			<h1 className='text-2xl font-semibold'>이벤트 비교</h1>
 			<TouchClick />
-		</h1>
+		</div>
 	);
 }
