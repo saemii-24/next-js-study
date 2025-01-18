@@ -7,7 +7,7 @@ const TouchClick = () => {
 	const [isDragging, setIsDragging] = useState<boolean>(false);
 
 	const containerRef = useRef<HTMLDivElement>(null);
-	const buttonSize = 80; // 버튼 크기 (px)
+	const buttonSize = 80;
 
 	// 하나의 상태로 통합
 	const [currentEvent, setCurrentEvent] = useState<string | null>(null);
