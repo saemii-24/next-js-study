@@ -1,5 +1,10 @@
 import TouchSlide from '@/components/TouchSlide';
+import Link from 'next/link';
 
 export default function TouchSlidePage() {
-	return <TouchSlide />;
+	return (
+		<div>
+			<TouchSlide />
+		</div>
+	);
 }
