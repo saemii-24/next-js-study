@@ -6,9 +6,8 @@ export const metadata = {
 
 export default function Page() {
 	return (
-		<h1 className='bg-red-50 text-red-800'>
-			버튼
+		<div className='px-4 py-6'>
 			<TouchClick />
-		</h1>
+		</div>
 	);
 }
