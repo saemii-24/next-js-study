@@ -6,6 +6,8 @@ const TouchClick = () => {
 
 	return (
 		<div>
+			<h2>터치 이벤트</h2>
+			<ul></ul>
 			<button
 				// onTouchStart={touchStart}
 				// onTouchMove={touchMove}
