@@ -6,8 +6,7 @@ export const metadata = {
 
 export default function Page() {
 	return (
-		<div>
-			<h1 className='text-2xl font-semibold'>이벤트 비교</h1>
+		<div className='px-4 py-6'>
 			<TouchClick />
 		</div>
 	);
