@@ -3,10 +3,13 @@
 @theme {
 	--color-lime: #b2f300;
 
-	--animate-fade-in-scale: fade-in-scale 2s ease-out;
+	--animate-scale-up: scale-up 2s ease-out;
+
+	--container-sm: 100px;
+	--container-md: 200px;
 }
 
-@keyframes fade-in-scale {
+@keyframes scale-up {
 	0% {
 		transform: scale(0);
 	}
