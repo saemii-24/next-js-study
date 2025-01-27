@@ -1,3 +1,4 @@
+/// <reference types="react/canary" />
 import './globals.css';
 import Provider from './Provider';
 import {Noto_Sans_KR} from 'next/font/google';

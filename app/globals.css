@@ -5,8 +5,10 @@
 
 	--animate-scale-up: scale-up 2s ease-out;
 
+	--container-xs: 50px;
 	--container-sm: 100px;
 	--container-md: 200px;
+	--container-lg: 300px;
 }
 
 @keyframes scale-up {
