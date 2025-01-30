@@ -85,7 +85,11 @@ const TouchClick = () => {
 				<h1 className='text-2xl font-semibold'>이벤트 비교</h1>
 				<button
 					onClick={clearLog}
+<<<<<<< HEAD
 					className='rounded bg-red-500 px-4 pb-1 pt-[3px] text-sm text-white hover:bg-red-700'>
+=======
+					className='rounded-sm bg-red-500 px-4 pb-1 pt-[3px] text-sm text-white hover:bg-red-700'>
+>>>>>>> 6af2117e1689725fda2ef36884109843af283e35
 					초기화
 				</button>
 			</div>
@@ -95,7 +99,11 @@ const TouchClick = () => {
 			<div className='mt-6'>
 				<div
 					ref={containerRef}
+<<<<<<< HEAD
 					className='relative h-60 w-full rounded border border-gray-300 bg-gray-100'>
+=======
+					className='relative h-60 w-full rounded-sm border border-gray-300 bg-gray-100'>
+>>>>>>> 6af2117e1689725fda2ef36884109843af283e35
 					<button
 						style={{
 							position: 'absolute',

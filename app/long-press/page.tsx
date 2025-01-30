@@ -35,6 +35,7 @@ export default function LongPress() {
 			{data.map((item) => (
 				<div
 					key={item.id}
+					data-testid={item.id}
 					className='relative h-[120px] w-[90%] rounded-md bg-gray-100 p-3 transition hover:bg-gray-200'
 					onTouchStart={() => touchStart(item.id)}
 					onTouchEnd={touchEnd}>

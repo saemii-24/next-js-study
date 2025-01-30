@@ -8,7 +8,7 @@ const First = () => {
 		<div>
 			<h1 className='mb-3 mt-2 text-2xl font-semibold'>First</h1>
 			<button
-				className='rounded bg-red-500 px-3 py-1 text-white'
+				className='rounded-sm bg-red-500 px-3 py-1 text-white'
 				onClick={() => {
 					router.push('/folder-practice/second');
 				}}>
