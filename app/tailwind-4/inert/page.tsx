@@ -18,7 +18,7 @@ export default function Disabled() {
 					폼 비활성화
 				</button>
 				<button
-					className={cn('bg-grayx-100', {'bg-sky-100': isActive === 'active'})}
+					className={cn('bg-gray-100', {'bg-sky-100': isActive === 'active'})}
 					onClick={() => {
 						setIsActive('active');
 					}}>
