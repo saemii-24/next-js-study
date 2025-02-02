@@ -2,6 +2,7 @@
 
 import Container from '@/components/Container';
 import {useActionState, useState, startTransition} from 'react';
+import {useForm} from './_components/useFieldError';
 export default function Form() {
 	return (
 		<Container>
@@ -10,6 +11,8 @@ export default function Form() {
 			<NumberForm />
 			<Container.SubTitle>form 예제2</Container.SubTitle>
 			<LoginForm />
+			<Container.SubTitle>form 예제3</Container.SubTitle>
+			{/* <EmailForm /> */}
 		</Container>
 	);
 }
