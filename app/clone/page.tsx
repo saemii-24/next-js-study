@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
+import Child from './_components/Child';
+import Child2 from './_components/Child2';
+import Parent from './_components/Parent';
 
-// 'someProp'이 옵션인 props 타입 정의
-const Clone = ({someProp}: {someProp?: string}) => {
-	console.log(someProp); // 이제 '추가된 값'이 출력될 것입니다
+const App = () => {
 	return (
-		<div>
-			<div>자식 컴포넌트에 내려주는 값: {someProp}</div>
-		</div>
+		<Parent>
+			<Child />
+			<Child2 num={3} />
+		</Parent>
 	);
 };
 
-export default Clone;
+export default App;
