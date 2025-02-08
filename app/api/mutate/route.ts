@@ -48,9 +48,25 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-	const {id} = (await request.json()) as {id: number};
-	const members = await getMembers();
-	const updatedMembers = members.filter((member) => member.id !== id);
-	await writeMembers(updatedMembers);
-	return NextResponse.json({message: 'Deleted successfully'}, {status: 204});
+	try {
+		const url = new URL(request.url);
+		const id = Number(url.searchParams.get('memberId'));
+
+		if (isNaN(id)) {
+			return NextResponse.json(
+				{message: 'Valid member ID is required'},
+				{status: 400},
+			);
+		}
+
+		const members = await getMembers();
+		const updatedMembers = members.filter((member) => member.id !== id);
+
+		await writeMembers(updatedMembers);
+
+		return NextResponse.json({message: 'Deleted successfully'}, {status: 200});
+	} catch (error) {
+		console.error('Error deleting member:', error);
+		return NextResponse.json({message: 'Internal Server Error'}, {status: 500});
+	}
 }

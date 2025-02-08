@@ -1,4 +1,8 @@
-import {useMutation, useSuspenseQuery} from '@tanstack/react-query';
+import {
+	useMutation,
+	useQueryClient,
+	useSuspenseQuery,
+} from '@tanstack/react-query';
 
 interface MemberType {
 	id: number;
@@ -44,7 +48,7 @@ interface MemberType {
 
 export function getMembersQuery() {
 	const getMembers = useSuspenseQuery<MemberType[], Error>({
-		queryKey: ['chatList'],
+		queryKey: ['members'],
 		queryFn: async (): Promise<MemberType[]> => {
 			const fetchData = await fetch('/api/mutate', {
 				method: 'GET',
@@ -64,19 +68,26 @@ export function getMembersQuery() {
 }
 
 export function deleteMembersQuery() {
-	const deleteMembers = useMutation({
-		mutationFn: async () => {
-			const fetchData = await fetch('/api/mutate', {
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation({
+		mutationFn: async (memberId: number) => {
+			const response = await fetch(`/api/mutate?memberId=${memberId}`, {
 				method: 'DELETE',
 			});
-			const fetchDataJson = await fetchData.json();
-			return fetchDataJson;
+			if (!response.ok) {
+				throw new Error('Failed to delete member');
+			}
+			return response.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({queryKey: ['members']});
 		},
 	});
 
 	return {
-		membersData: deleteMembers.data,
-		membersIsError: deleteMembers.isError,
-		membersIsSuccess: deleteMembers.isSuccess,
+		deleteMember: mutation.mutate,
+		membersIsError: mutation.isError,
+		membersIsSuccess: mutation.isSuccess,
 	};
 }
