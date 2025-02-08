@@ -9,6 +9,7 @@ interface Member {
 	height: number;
 }
 
+// process.cwd() = 프로젝트의 루트 디렉토리
 const filePath = path.join(process.cwd(), 'data', 'members.json');
 
 async function getMembers(): Promise<Member[]> {
