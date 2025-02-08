@@ -1,4 +1,4 @@
-import {useSuspenseQuery} from '@tanstack/react-query';
+import {useMutation, useSuspenseQuery} from '@tanstack/react-query';
 
 interface MemberType {
 	id: number;
@@ -42,7 +42,7 @@ interface MemberType {
 // 	if (!response.ok) throw new Error('멤버삭제 실패');
 // };
 
-export default function getMembersQuery() {
+export function getMembersQuery() {
 	const getMembers = useSuspenseQuery<MemberType[], Error>({
 		queryKey: ['chatList'],
 		queryFn: async (): Promise<MemberType[]> => {
@@ -60,5 +60,23 @@ export default function getMembersQuery() {
 		membersIsError: getMembers.isError,
 		membersIsSuccess: getMembers.isSuccess,
 		membersRefetch: getMembers.refetch,
+	};
+}
+
+export function deleteMembersQuery() {
+	const deleteMembers = useMutation({
+		mutationFn: async () => {
+			const fetchData = await fetch('/api/mutate', {
+				method: 'DELETE',
+			});
+			const fetchDataJson = await fetchData.json();
+			return fetchDataJson;
+		},
+	});
+
+	return {
+		membersData: deleteMembers.data,
+		membersIsError: deleteMembers.isError,
+		membersIsSuccess: deleteMembers.isSuccess,
 	};
 }
