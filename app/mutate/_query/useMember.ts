@@ -4,7 +4,7 @@ import {
 	useSuspenseQuery,
 } from '@tanstack/react-query';
 
-interface MemberType {
+export interface MemberType {
 	id: number;
 	name: string;
 	birth: number;
@@ -87,6 +87,35 @@ export function deleteMembersQuery() {
 
 	return {
 		deleteMember: mutation.mutate,
+		membersIsError: mutation.isError,
+		membersIsSuccess: mutation.isSuccess,
+	};
+}
+
+export function postMemberQuery() {
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation({
+		mutationFn: async (member: MemberType) => {
+			const response = await fetch(`/api/mutate`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(member),
+			});
+			if (!response.ok) {
+				throw new Error('Failed to add member');
+			}
+			return response.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({queryKey: ['members']}); // 멤버 목록을 새로 고침
+		},
+	});
+
+	return {
+		postMember: mutation.mutate,
 		membersIsError: mutation.isError,
 		membersIsSuccess: mutation.isSuccess,
 	};

@@ -25,13 +25,14 @@ export async function GET() {
 	const members = await getMembers();
 	return NextResponse.json(members);
 }
-
 export async function POST(request: Request) {
-	const newMember = {id: Date.now(), ...(await request.json())} as Member;
+	const newMember = (await request.json()) as Member;
 	const members = await getMembers();
+
 	members.push(newMember);
 	await writeMembers(members);
-	return NextResponse.json(newMember, {status: 201});
+
+	return NextResponse.json(newMember, {status: 200});
 }
 
 export async function PUT(request: Request) {
