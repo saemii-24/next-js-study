@@ -7,44 +7,8 @@ import {
 export interface MemberType {
 	id: number;
 	name: string;
-	birth: number;
-	height: number;
+	position: string;
 }
-
-// const fetchMembers = async () => {
-// 	const response = await fetch('/api/members');
-// 	if (!response.ok) throw new Error('Network response was not ok');
-// 	return response.json();
-// };
-
-// const addMember = async (newMember: Omit<Member, 'id'>) => {
-// 	const response = await fetch('/api/members', {
-// 		method: 'POST',
-// 		headers: {'Content-Type': 'application/json'},
-// 		body: JSON.stringify(newMember),
-// 	});
-// 	if (!response.ok) throw new Error('멤버 추가 실패');
-// 	return response.json();
-// };
-
-// const updateMember = async (updatedMember: Member) => {
-// 	const response = await fetch('/api/members', {
-// 		method: 'PUT',
-// 		headers: {'Content-Type': 'application/json'},
-// 		body: JSON.stringify(updatedMember),
-// 	});
-// 	if (!response.ok) throw new Error('멤버 정보 업데이트 실패');
-// 	return response.json();
-// };
-
-// const deleteMember = async (id: number) => {
-// 	const response = await fetch('/api/members', {
-// 		method: 'DELETE',
-// 		headers: {'Content-Type': 'application/json'},
-// 		body: JSON.stringify({id}),
-// 	});
-// 	if (!response.ok) throw new Error('멤버삭제 실패');
-// };
 
 export function getMembersQuery() {
 	const getMembers = useSuspenseQuery<MemberType[], Error>({
@@ -110,12 +74,41 @@ export function postMemberQuery() {
 			return response.json();
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({queryKey: ['members']}); // 멤버 목록을 새로 고침
+			queryClient.invalidateQueries({queryKey: ['members']});
 		},
 	});
 
 	return {
 		postMember: mutation.mutate,
+		membersIsError: mutation.isError,
+		membersIsSuccess: mutation.isSuccess,
+	};
+}
+
+export function putMemberQuery() {
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation({
+		mutationFn: async (member: MemberType) => {
+			const response = await fetch(`/api/mutate`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(member),
+			});
+			if (!response.ok) {
+				throw new Error('Failed to add member');
+			}
+			return response.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({queryKey: ['members']});
+		},
+	});
+
+	return {
+		putMember: mutation.mutate,
 		membersIsError: mutation.isError,
 		membersIsSuccess: mutation.isSuccess,
 	};
