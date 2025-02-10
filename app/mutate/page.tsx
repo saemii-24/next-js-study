@@ -76,7 +76,7 @@ export default function Mutate() {
 								<td className='text-center'>
 									<button
 										onClick={(e) => {
-											e.stopPropagation(); // 클릭 이벤트 전파 방지
+											e.stopPropagation();
 											deleteMember(member.id);
 										}}
 										className='px-2 rounded-sm bg-red-500 text-white hover:bg-red-500/70 cursor-pointer'>
@@ -86,7 +86,7 @@ export default function Mutate() {
 								<td className='text-center'>
 									<button
 										onClick={(e) => {
-											e.stopPropagation(); // 클릭 이벤트 전파 방지
+											e.stopPropagation();
 											setSelectedMember(member);
 											setIsEditMode(true);
 										}}
