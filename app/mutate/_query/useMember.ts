@@ -7,8 +7,7 @@ import {
 export interface MemberType {
 	id: number;
 	name: string;
-	birth: number;
-	height: number;
+	position: string;
 }
 
 export function getMembersQuery() {
@@ -75,12 +74,41 @@ export function postMemberQuery() {
 			return response.json();
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({queryKey: ['members']}); // 멤버 목록을 새로 고침
+			queryClient.invalidateQueries({queryKey: ['members']});
 		},
 	});
 
 	return {
 		postMember: mutation.mutate,
+		membersIsError: mutation.isError,
+		membersIsSuccess: mutation.isSuccess,
+	};
+}
+
+export function putMemberQuery() {
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation({
+		mutationFn: async (member: MemberType) => {
+			const response = await fetch(`/api/mutate`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(member),
+			});
+			if (!response.ok) {
+				throw new Error('Failed to add member');
+			}
+			return response.json();
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({queryKey: ['members']});
+		},
+	});
+
+	return {
+		putMember: mutation.mutate,
 		membersIsError: mutation.isError,
 		membersIsSuccess: mutation.isSuccess,
 	};

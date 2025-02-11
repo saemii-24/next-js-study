@@ -3,9 +3,7 @@
 import Container from '@/components/Container';
 import {createContext, useState} from 'react';
 
-// Context 생성
-export const LayoutContext = createContext('기본값 - 레이아웃');
-export const LayoutIdContext = createContext({
+const LayoutIdContext = createContext({
 	id: 1,
 	increase: () => {},
 	decrease: () => {},
