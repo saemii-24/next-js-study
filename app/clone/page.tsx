@@ -2,13 +2,11 @@
 
 import {useContext} from 'react';
 import {TemplateContext} from './template';
-import {LayoutContext} from './layout';
 import Container from '@/components/Container';
 import {useRouter} from 'next/navigation';
 
 export default function Clone() {
 	const templateContext = useContext(TemplateContext);
-	const layoutContext = useContext(LayoutContext);
 	const router = useRouter();
 
 	return (
@@ -17,7 +15,6 @@ export default function Clone() {
 			<div>{templateContext}</div>
 
 			<div className='font-bold'>layout.tsx에서 받은 값</div>
-			<div>{layoutContext}</div>
 
 			<div className='mt-3 text-xl font-semibold'>이동하기</div>
 			{new Array(9).fill(0).map((_, index) => (

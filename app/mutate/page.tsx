@@ -1,10 +1,10 @@
 'use client';
 import Container from '@/components/Container';
 import {
-	deleteMembersQuery,
-	getMembersQuery,
-	postMemberQuery,
-	putMemberQuery,
+	useDeleteMembersQuery,
+	useGetMembersQuery,
+	usePostMemberQuery,
+	usePutMemberQuery,
 } from './_query/useMember';
 import {Suspense, useState} from 'react';
 import {useActionState} from 'react';
@@ -19,10 +19,10 @@ interface MemberType {
 export default function Mutate() {
 	const [isEditMode, setIsEditMode] = useState<boolean>(false);
 	const [selectedMember, setSelectedMember] = useState<MemberType | null>(null);
-	const {membersData} = getMembersQuery();
-	const {deleteMember} = deleteMembersQuery();
-	const {postMember} = postMemberQuery();
-	const {putMember} = putMemberQuery();
+	const {membersData} = useGetMembersQuery();
+	const {deleteMember} = useDeleteMembersQuery();
+	const {postMember} = usePostMemberQuery();
+	const {putMember} = usePutMemberQuery();
 
 	// update 함수 정의
 	async function updateMember(

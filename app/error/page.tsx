@@ -11,9 +11,19 @@ const initialState = {
 export default function Form() {
 	const [state, formAction, pending] = useActionState(createPost, initialState);
 
+	function throwError() {
+		throw new Error('에러 강제 발생!');
+	}
+
 	return (
 		<Container>
 			<Container.Title>에러 핸들링</Container.Title>
+			<button
+				type='button'
+				onClick={throwError}
+				className='w-full text-center bg-red-500 text-white h-8 rounded-md mt-3 cursor-pointer hover:bg-red-500/70'>
+				에러 발생
+			</button>
 			<form action={formAction} className='mt-3 flex flex-col'>
 				<label htmlFor='title' className='font-semibold text-lg mb-1'>
 					제목

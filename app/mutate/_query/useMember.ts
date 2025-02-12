@@ -10,7 +10,7 @@ export interface MemberType {
 	position: string;
 }
 
-export function getMembersQuery() {
+export function useGetMembersQuery() {
 	const getMembers = useSuspenseQuery<MemberType[], Error>({
 		queryKey: ['members'],
 		queryFn: async (): Promise<MemberType[]> => {
@@ -31,7 +31,7 @@ export function getMembersQuery() {
 	};
 }
 
-export function deleteMembersQuery() {
+export function useDeleteMembersQuery() {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
@@ -56,7 +56,7 @@ export function deleteMembersQuery() {
 	};
 }
 
-export function postMemberQuery() {
+export function usePostMemberQuery() {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
@@ -85,7 +85,7 @@ export function postMemberQuery() {
 	};
 }
 
-export function putMemberQuery() {
+export function usePutMemberQuery() {
 	const queryClient = useQueryClient();
 
 	const mutation = useMutation({
@@ -98,7 +98,7 @@ export function putMemberQuery() {
 				body: JSON.stringify(member),
 			});
 			if (!response.ok) {
-				throw new Error('Failed to add member');
+				throw new Error('Failed to update member');
 			}
 			return response.json();
 		},
