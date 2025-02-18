@@ -1,7 +1,7 @@
 'use client';
 import {useEffect, useState} from 'react';
 
-export default function Example() {
+export default function FetchErrorExample() {
 	const [error, setError] = useState<Error | null>(null);
 
 	const fetchError = async () => {
@@ -11,12 +11,11 @@ export default function Example() {
 			});
 
 			if (!response.ok) {
-				const errorData = await response.json();
-				throw new Error(errorData.message || `서버 오류: ${response.status}`);
+				throw new Error('에러가 발생했습니다');
 			}
 		} catch (err) {
-			//instance of = 객체가 특정 클래스의 인스턴스인지 확인한다.
-			//즉, err가 ERrror 객체인지 확인하는 과정이다.
+			// instance of = 객체가 특정 클래스의 인스턴스인지 확인한다.
+			// 즉, err가 ERrror 객체인지 확인하는 과정이다.
 			if (err instanceof Error) {
 				setError(err);
 			}
