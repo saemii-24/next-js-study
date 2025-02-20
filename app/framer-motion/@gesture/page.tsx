@@ -174,7 +174,7 @@ export default function Usage() {
 					</button>
 				</motion.div>
 				<div>
-					SVG에 가우시안 블러주기
+					SVG에 블러효과 주기
 					<div className='text-xs text-gray-500'>
 						파란 원(svg)에 hover 해보세요!
 					</div>
@@ -201,6 +201,13 @@ export default function Usage() {
 							variants={{hover: {stdDeviation: 2}}}
 						/>
 					</filter>
+					<motion.circle
+						cx='150'
+						cy='150'
+						r='50'
+						fill='blue'
+						filter='url(#blur)' // 필터 적용
+					/>
 				</motion.svg>
 
 				<div>
