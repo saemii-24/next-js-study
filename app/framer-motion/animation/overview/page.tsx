@@ -1,7 +1,7 @@
 'use client';
 import {motion} from 'motion/react';
 import {useState} from 'react';
-export default function Usage() {
+export default function Overview() {
 	const [animationTrigger, setAnimationTrigger] = useState<boolean>(false);
 	return (
 		<>

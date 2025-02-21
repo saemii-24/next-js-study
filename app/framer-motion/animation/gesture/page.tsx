@@ -1,7 +1,7 @@
 'use client';
 import {motion} from 'motion/react';
 import {useRef, useState} from 'react';
-export default function Usage() {
+export default function Gesture() {
 	const [hoverStart, setHoverStart] = useState<string>('호버 안하는 중...');
 	const [scale, setScale] = useState<number>(1);
 	const [tapMessage, setTapMessage] = useState<string>('탭을 시도해주세요!');
