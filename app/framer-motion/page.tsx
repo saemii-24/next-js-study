@@ -20,6 +20,12 @@ export default function Page() {
 						<li>
 							<Link href={`${pathname}/animation/gesture`}>gesture</Link>
 						</li>
+						<li>
+							<Link href={`${pathname}/animation/scroll`}>scroll</Link>
+						</li>
+						<li>
+							<Link href={`${pathname}/animation/scroll`}>scroll</Link>
+						</li>
 					</ul>
 				</li>
 				<li>
