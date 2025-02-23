@@ -85,6 +85,10 @@ export default function Layout() {
 			</div>
 			<div className='mt-4'>
 				<h2>예제 2번</h2>
+				<p className='text-sm text-gray-600 mb-5 mt-1'>
+					같은 이모지의 작은 카드와 큰 카드의 layoutId를 동일하게 설정해
+					부드럽게 커지는 듯한 애니메이션을 만들어주었다.
+				</p>
 				<div className='flex divide-x divide-gray-300 gap-2 mt-3'>
 					{allIngredients.map((item, index) => (
 						<motion.div
@@ -108,10 +112,10 @@ export default function Layout() {
 									{selectedId && (
 										<motion.div
 											className='text-lg mt-4'
-											initial={'hidden'}
-											animate={'show'}
-											exit={'hidden'}
-											transition={{delay: 0.3}}>
+											initial={{opacity: 0}}
+											animate={{opacity: 1}}
+											exit={{opacity: 0}}
+											transition={{delay: 0.2, duration: 0.3}}>
 											{
 												allIngredients.find((item) => item.id === selectedId)
 													?.label
