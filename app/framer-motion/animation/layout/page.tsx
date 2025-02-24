@@ -1,6 +1,6 @@
 'use client';
 import React, {useState} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
+import {AnimatePresence, LayoutGroup, motion} from 'framer-motion';
 import Container from '@/components/Container';
 import {cn} from 'utils/cn';
 
@@ -23,6 +23,33 @@ export default function Layout() {
 	const [isOn, setIsOn] = useState(false);
 	const [selectedTab, setSelectedTab] = useState<Tab>(tabs[0]);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
+	const [items, setItems] = useState<number[]>([1, 2, 3, 4, 5]);
+	const [addComponent, setAddComponent] = useState<number[]>([1]);
+
+	const reorderItems = () => {
+		setItems((prevItems) => {
+			const newItems = [...prevItems];
+			const [movedItem] = newItems.splice(0, 1); // 첫 번째 요소를 제거
+			newItems.push(movedItem); // 마지막에 추가
+			return newItems;
+		});
+	};
+
+	const getRandomColor = () => {
+		const letters = '0123456789ABCDEF';
+		let color = '#';
+		for (let i = 0; i < 6; i++) {
+			color += letters[Math.floor(Math.random() * 16)];
+		}
+		return color;
+	};
+
+	const addNewComponent = () => {
+		setAddComponent((prev) => {
+			const newItem = prev.length > 0 ? prev[0] + 1 : 1; // 가장 앞의 숫자 +1
+			return [newItem, ...prev]; // 앞에 추가
+		});
+	};
 
 	return (
 		<Container>
@@ -130,6 +157,103 @@ export default function Layout() {
 					)}
 				</AnimatePresence>
 			</div>
+			<div className='mt-4'>
+				<h2>예제 3번</h2>
+				<p className='text-sm text-gray-600 mb-5 mt-1'>
+					React의 re-render로 인해 발생하는 레이아웃 변화를 애니메이션으로
+					처리할 수 있다!
+				</p>
+				<button
+					onClick={reorderItems}
+					className='cursor-pointer bg-blue-500 rounded-lg text-white px-4 py-2 hover:bg-blue-500/70'>
+					순서 변경
+				</button>
+				<div className='mt-4 flex flex-col space-y-2'>
+					{items.map((item) => (
+						<motion.div
+							key={item}
+							layout
+							className='p-4 bg-yellow-500 rounded-lg '
+							style={{backgroundColor: getRandomColor()}}>
+							아이템 {item}
+						</motion.div>
+					))}
+				</div>
+			</div>
+			<div className='mt-4'>
+				<h2>예제 4번</h2>
+				<p className='text-sm text-gray-600 mb-5 mt-1'>
+					기존 컴포넌트가 추가 될 때도 부드럽게 애니메이션을 추가할 수 있다!
+				</p>
+				<button
+					onClick={addNewComponent}
+					className='cursor-pointer bg-blue-500 rounded-lg text-white px-4 py-2 hover:bg-blue-500/70'>
+					컴포넌트 추가
+				</button>
+				<div className='mt-4 flex flex-col gap-2'>
+					{addComponent.map((item) => (
+						<motion.div
+							key={item}
+							layoutId={`item-${item}`}
+							layout
+							initial={{opacity: 0, scale: 0.8}}
+							animate={{opacity: 1, scale: 1}}
+							exit={{opacity: 0, scale: 0.8}}
+							className='p-4 bg-yellow-500 rounded-lg '>
+							아이템 {item}
+						</motion.div>
+					))}
+				</div>
+			</div>
+			<div className='mt-4'>
+				<h2>예제 5번</h2>
+				<p className='text-sm text-gray-600 mb-5 mt-1'>
+					서로 다른 컴포넌트가 개별적으로 리렌더링될 경우,
+					<code className='code'>motion.div</code>는 기본적으로 다른 컴포넌트의
+					레이아웃 변화를 감지하지 못해 애니메이션이 올바르게 동작하지 않는
+					경우가 있다.
+				</p>
+				<h3 className='text-sm mb-2'>❌ 개별적 렌더링, 그룹화 되지 않음</h3>
+				<div className='flex flex-col items-center gap-2'>
+					<Accordion />
+					<Accordion />
+					<Accordion />
+				</div>
+			</div>
+			<div className='mt-4'>
+				<h3 className='text-sm mb-2'>
+					✅ <code className='code'>&lsaquo;LayoutGroup&rsaquo;</code>를 이용해
+					그룹화
+				</h3>
+				<LayoutGroup>
+					<div className='flex flex-col items-center gap-2'>
+						<Accordion />
+						<Accordion />
+						<Accordion />
+					</div>
+				</LayoutGroup>
+			</div>
 		</Container>
+	);
+}
+
+function Accordion() {
+	const [isOpen, setOpen] = useState(false);
+
+	return (
+		<motion.div
+			layout
+			onClick={() => setOpen(!isOpen)}
+			className='p-4 bg-yellow-500 w-full rounded-lg cursor-pointer '
+			style={{height: isOpen ? '150px' : '50px'}}>
+			<motion.span
+				key={isOpen ? 'open' : 'closed'} //key가 변경될때마다 컴포넌트가 새로 마운트 되면서 initial=> animate 애니메이션이 재실행
+				initial={{opacity: 0}}
+				animate={{opacity: 1}}
+				exit={{opacity: 0}}
+				transition={{duration: 0.2, delay: 0.3}}>
+				{isOpen ? '클릭해서 닫기' : '클릭해서 펼치기'}
+			</motion.span>
+		</motion.div>
 	);
 }
