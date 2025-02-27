@@ -1,11 +1,20 @@
 import React, {ReactNode} from 'react';
+import {cn} from 'utils/cn';
 
 const Container = ({children}: {children: ReactNode}) => {
 	return <div className='w-full p-6'>{children}</div>;
 };
 
-const Title = ({children}: {children: ReactNode}) => {
-	return <h1 className='text-2xl font-semibold'>{children}</h1>;
+const Title = ({
+	children,
+	className,
+}: {
+	children: ReactNode;
+	className?: string;
+}) => {
+	return (
+		<h1 className={cn('text-2xl font-semibold', className)}>{children}</h1>
+	);
 };
 
 const SubTitle = ({children}: {children: ReactNode}) => {
