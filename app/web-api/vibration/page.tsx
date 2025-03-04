@@ -10,7 +10,7 @@ export default function Vibration() {
 	const handleTouchStart = () => {
 		pressTimer.current = setTimeout(() => {
 			if ('vibrate' in navigator) {
-				navigator.vibrate(200); // 롱 프레스 시 진동 200ms
+				navigator.vibrate(50); // 롱 프레스 시 진동 50ms
 			}
 			setLongPressActive(true); // 롱 프레스가 시작되었음을 상태로 관리
 		}, 1000); // 1초 이상 눌렀을 때 롱 프레스 시작
