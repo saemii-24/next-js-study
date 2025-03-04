@@ -34,6 +34,7 @@ export default function NotificationPage() {
 	return (
 		<Container>
 			<Container.Title>Notification</Container.Title>
+			<p className='mb-4'>알림은 PC에서만 작동합니다!</p>
 			<p>
 				버튼을 눌러 사용자에게
 				<br />
