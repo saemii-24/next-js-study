@@ -41,3 +41,7 @@
 .code {
 	@apply text-xs text-blue-800 bg-gray-100 px-1 py-0.5 rounded-md border border-gray-300;
 }
+
+.center-flex {
+	@apply items-center justify-center flex;
+}
