@@ -24,9 +24,6 @@ export function useGetMembersQuery() {
 
 	return {
 		membersData: getMembers.data,
-		membersIsLoading: getMembers.isLoading,
-		membersIsError: getMembers.isError,
-		membersIsSuccess: getMembers.isSuccess,
 		membersRefetch: getMembers.refetch,
 	};
 }
