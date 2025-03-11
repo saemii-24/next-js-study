@@ -1,1 +1,6 @@
-{}
+{
+	"2025-03-11": [
+		{"id": 1, "title": "Next JS 공부", "completed": false},
+		{"id": 2, "title": "영단어 공부", "completed": false}
+	]
+}

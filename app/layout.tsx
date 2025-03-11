@@ -1,11 +1,11 @@
 /// <reference types="react/canary" />
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {ErrorWrapper} from './error-wrapper';
 import './globals.css';
 import Provider from './Provider';
 import {Noto_Sans_KR} from 'next/font/google';
 
 const noto = Noto_Sans_KR({subsets: ['latin']});
-
 export default function RootLayout({children}: {children: React.ReactNode}) {
 	return (
 		<html lang='ko' className={noto.className}>

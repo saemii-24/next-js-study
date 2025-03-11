@@ -2,12 +2,18 @@
 
 import {ReactNode, useEffect, useState} from 'react';
 import './globals.css';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 interface ProviderProps {
 	children: ReactNode;
 }
+const queryClient = new QueryClient();
 export default function Provider({children}: ProviderProps) {
-	return <MSWComponent>{children}</MSWComponent>;
+	return (
+		<QueryClientProvider client={queryClient}>
+			<MSWComponent>{children}</MSWComponent>
+		</QueryClientProvider>
+	);
 }
 
 export const MSWComponent = ({children}: {children: React.ReactNode}) => {

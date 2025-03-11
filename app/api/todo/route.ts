@@ -80,7 +80,9 @@ export async function POST(request: Request) {
 
 // 📌PUT: 특정 날짜 TODO 수정
 export async function PUT(request: Request) {
-	const {date, id, title, completed} = await request.json();
+	const url = new URL(request.url); //url을 객체 형태로 변환한다.
+	const date = url.searchParams.get('date');
+	const {id, title, completed} = await request.json();
 
 	if (!date || id === undefined) {
 		return NextResponse.json(

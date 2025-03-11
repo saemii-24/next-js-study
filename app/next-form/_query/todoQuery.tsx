@@ -11,15 +11,14 @@ export interface TodoType {
 }
 
 // 📌GET 요청
-export function useGetTodoQuery() {
+export function useGetTodoQuery({date}: {date: string}) {
 	const getTodo = useSuspenseQuery<TodoType[], Error>({
 		queryKey: ['todo'],
 		queryFn: async (): Promise<TodoType[]> => {
-			const fetchData = await fetch('/api/todo', {
+			const response = await fetch(`/api/todo?date=${date}`, {
 				method: 'GET',
 			});
-			const response = await fetchData.json();
-			return response;
+			return await response.json();
 		},
 	});
 
