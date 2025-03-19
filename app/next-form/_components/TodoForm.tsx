@@ -1,11 +1,13 @@
 import React from 'react';
 import Form from 'next/form';
 import {useActionState} from 'react';
+import {TodoProvider, useTodo} from '../_context/TodoContext';
 
 const TodoForm = () => {
-	const [todo, formAction, isPending] = useActionState(createTodo, null);
+	const [todo, formAction, isPending] = useActionState(createTodo, {});
+	const {formatDate} = useTodo();
 
-	async function createTodo(formData: FormData): Promise<any> {
+	async function createTodo(_: any, formData: FormData): Promise<any> {
 		const title = formData.get('title');
 
 		const response = await fetch('/api/todo', {
@@ -14,13 +16,12 @@ const TodoForm = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				date: '2025-03-19',
 				title: title,
+				date: formatDate,
 			}),
 		});
 		return response.json();
 	}
-
 	return (
 		<Form action={formAction}>
 			<label htmlFor='title'>해야할 일</label>
