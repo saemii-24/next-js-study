@@ -1,10 +1,33 @@
 {
 	"2025-03-11": [
-		{"id": 1, "title": "Next JS 공부", "completed": false},
-		{"id": 2, "title": "영단어 공부", "completed": false}
+		{
+			"id": 1,
+			"title": "Next JS 공부",
+			"completed": false
+		},
+		{
+			"id": 2,
+			"title": "영단어 공부",
+			"completed": false
+		}
 	],
 	"2025-03-12": [
-		{"id": 1, "title": "Next JS 공부", "completed": false},
-		{"id": 2, "title": "영단어 공부", "completed": false}
+		{
+			"id": 1,
+			"title": "Next JS 공부",
+			"completed": false
+		},
+		{
+			"id": 2,
+			"title": "영단어 공부",
+			"completed": false
+		}
+	],
+	"2025-03-19": [
+		{
+			"id": 1742393944341,
+			"title": "청소",
+			"completed": false
+		}
 	]
 }
