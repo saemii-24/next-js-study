@@ -18,6 +18,7 @@ interface TodoProviderProps {
 	children: ReactNode;
 }
 
+//Context 만들어서 제공
 export const TodoProvider = ({children}: TodoProviderProps) => {
 	const today = new Date();
 	const formatDate = today
@@ -40,6 +41,7 @@ export const TodoProvider = ({children}: TodoProviderProps) => {
 	);
 };
 
+//실제  Context 정보 사용
 export const useTodo = () => {
 	const context = useContext(TodoContext);
 	if (!context) {
