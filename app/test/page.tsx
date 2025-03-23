@@ -5,11 +5,14 @@ import {useState} from 'react';
 
 export default function Test() {
 	const [isRemoved, setIsRemoved] = useState<boolean>(false);
+	const removeThis = () => {
+		setIsRemoved(true);
+	};
 
 	return (
 		<Container>
 			<Container.Title>Test용 컴포넌트 들</Container.Title>
-			<RemoveComponent isRemoved={isRemoved} setIsRemoved={setIsRemoved} />
+			<RemoveComponent isRemoved={isRemoved} removeThis={removeThis} />
 		</Container>
 	);
 }

@@ -1,22 +1,27 @@
 import {
 	render,
 	screen,
-	fireEvent,
 	waitFor,
 	waitForElementToBeRemoved,
 } from '@testing-library/react';
-import RemoveComponent from 'app/test/_components/RemoveComponent';
+import userEvent from '@testing-library/user-event';
+import Test from 'app/test/page';
 
 it('삭제하기 버튼을 누르면 text가 DOM에서 제거된다.', async () => {
-	const setIsRemoved = jest.fn();
-	render(<RemoveComponent isRemoved={false} setIsRemoved={setIsRemoved} />);
+	render(<Test />);
 
-	expect(screen.getByText('신짱구')).toBeInTheDocument();
+	// "삭제하기" 버튼을 클릭
+	userEvent.click(screen.getByRole('button', {name: /짱구 삭제하기!/i}));
 
-	const button = screen.getByRole('button', {name: /짱구 삭제하기!/i});
-	fireEvent.click(button);
+	// "신짱구" 텍스트가 DOM에서 제거될 때까지 기다림
+	await waitForElementToBeRemoved(() => screen.queryByText('신짱구'));
 
-	expect(setIsRemoved).toHaveBeenCalledWith(true);
+	// await waitFor(() => {
+	// 	// 텍스트가 제거되었는지 확인
+	// 	expect(screen.queryByText('신짱구')).toBeNull();
+	// 	expect;
+	// });
 
-	await waitFor(() => screen.queryByText('신짱구') === null);
+	// 텍스트가 제거되었는지 확인
+	expect(screen.queryByText('신짱구')).toBeNull();
 });

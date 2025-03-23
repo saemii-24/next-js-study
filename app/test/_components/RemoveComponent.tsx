@@ -3,14 +3,10 @@ import React, {useState} from 'react';
 
 interface RemoveComponentProps {
 	isRemoved: boolean;
-	setIsRemoved: (isRemoved: boolean) => void;
+	removeThis: () => void;
 }
 
-const RemoveComponent = ({isRemoved, setIsRemoved}: RemoveComponentProps) => {
-	const removeThis = () => {
-		setIsRemoved(true);
-	};
-
+const RemoveComponent = ({isRemoved, removeThis}: RemoveComponentProps) => {
 	return (
 		<div>
 			{!isRemoved && (
