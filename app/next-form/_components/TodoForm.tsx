@@ -3,7 +3,11 @@ import Form from 'next/form';
 import {useActionState} from 'react';
 import {TodoProvider, useTodo} from '../_context/TodoContext';
 
-const TodoForm = () => {
+const TodoForm = ({
+	setFetchData,
+}: {
+	setFetchData: React.Dispatch<React.SetStateAction<any[]>>;
+}) => {
 	const [todo, formAction, isPending] = useActionState(createTodo, {});
 	const {formatDate} = useTodo();
 
@@ -20,15 +24,30 @@ const TodoForm = () => {
 				date: formatDate,
 			}),
 		});
-		return response.json();
+
+		const newTodo = await response.json();
+		setFetchData((prev) => [...prev, newTodo]);
+
+		return newTodo;
 	}
+
 	return (
-		<Form action={formAction}>
-			<label htmlFor='title'>해야할 일</label>
-			<input name='title' />
-			<button type='submit' disabled={isPending}>
-				{isPending ? 'Submitting...' : 'Submit'}{' '}
-			</button>
+		<Form action={formAction} className='flex gap-2 mt-5 border-t '>
+			<div className='pt-2'>
+				<div className='gap-2 flex'>
+					<input
+						placeholder='해야 할 일을 적어주세요'
+						name='title'
+						className='outline-none  w-full border-gray-400 py-1 '
+					/>
+					<button
+						type='submit'
+						disabled={isPending}
+						className=' disabled:text-gray-400 text-black shrink-0 w-20 text-end cursor-pointer '>
+						{isPending ? '제출중' : '제출'}
+					</button>
+				</div>
+			</div>
 		</Form>
 	);
 };
