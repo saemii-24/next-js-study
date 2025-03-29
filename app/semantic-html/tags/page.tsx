@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import ChartComponent from 'app/chart/page';
 
 export default function Tags() {
 	return (
@@ -80,20 +81,20 @@ export default function Tags() {
 					</dl>
 				</div>
 				<div>
-					<h1>
-						<code className='code'>&lt;menu&gt;</code>
+					<h1 className='flex gap-2'>
+						<code className='code'>&lt;figure&gt;</code>
+						<code className='code'>&lt;figcaption&gt;</code>
 					</h1>
-					<menu>
-						<li>
-							<button>Copy</button>
-						</li>
-						<li>
-							<button>Cut</button>
-						</li>
-						<li>
-							<button>Paste</button>
-						</li>
-					</menu>
+					<figure>
+						<ChartComponent />
+						<figcaption>가짜 데이터로 만든 chart.js 바 차트</figcaption>
+					</figure>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;pre&gt;</code>
+					</h1>
+					<pre></pre>
 				</div>
 			</div>
 		</Container>
