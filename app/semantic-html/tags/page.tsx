@@ -39,6 +39,15 @@ export default function Tags() {
 				</div>
 				<div>
 					<h1>
+						<code className='code'>&lt;aside&gt;</code>
+					</h1>
+					<aside>
+						✨콜아웃
+						<p>main 콘텐츠와 연관된 콜아웃 내용이 들어갑니다.</p>
+					</aside>
+				</div>
+				<div>
+					<h1>
 						<code className='code'>&lt;hgroup&gt;</code>
 					</h1>
 					<hgroup>
@@ -69,6 +78,22 @@ export default function Tags() {
 						<dt>반품 문의</dt>
 						<dd>반품 신청은 배송 완료 후 7일 이내에 가능합니다.</dd>
 					</dl>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;menu&gt;</code>
+					</h1>
+					<menu>
+						<li>
+							<button>Copy</button>
+						</li>
+						<li>
+							<button>Cut</button>
+						</li>
+						<li>
+							<button>Paste</button>
+						</li>
+					</menu>
 				</div>
 			</div>
 		</Container>
