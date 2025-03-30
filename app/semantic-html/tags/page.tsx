@@ -94,7 +94,15 @@ export default function Tags() {
 					<h1>
 						<code className='code'>&lt;pre&gt;</code>
 					</h1>
-					<pre></pre>
+					<pre>(╯°□°）╯︵ ┻━┻</pre>
+				</div>
+				<div>
+					<h1 className='flex gap-2'>
+						<code className='code'>&lt;datalist&gt;</code>
+						<code className='code'>&lt;fieldset&gt;</code>
+						<code className='code'>&lt;legend&gt;</code>
+					</h1>
+					<div></div>
 				</div>
 			</div>
 		</Container>
