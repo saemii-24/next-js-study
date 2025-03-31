@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import ChartComponent from 'app/chart/page';
 
 export default function Tags() {
 	return (
@@ -28,14 +29,80 @@ export default function Tags() {
 					<h1>
 						<code className='code'>&lt;address&gt;</code>
 					</h1>
-					<p>
+					<div>
 						<p>이메일, 전화번호, URL, 주소등 연락처 정보를 나타낼 수 있어요.</p>
 						<address className='text-gray-400'>
 							<p>
 								전화번호: <a href='tel:+010-1234-5678'>+82 (010) 1234-5678</a>
 							</p>
 						</address>
-					</p>
+					</div>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;aside&gt;</code>
+					</h1>
+					<aside>
+						✨콜아웃
+						<p>main 콘텐츠와 연관된 콜아웃 내용이 들어갑니다.</p>
+					</aside>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;hgroup&gt;</code>
+					</h1>
+					<hgroup>
+						<h1 className='text-2xl'>제목 h1태그</h1>
+						<p>부제목 p태그</p>
+					</hgroup>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;dl&gt;</code>
+						<p>설명 목록(Definition List)</p>
+					</h1>
+					<h1>
+						<code className='code'>&lt;dt&gt;</code>
+						<p>설명 용어(Definition Term)</p>
+					</h1>
+					<h1>
+						<code className='code'>&lt;dd&gt;</code>
+						<p>설명 (Definition Description)</p>
+					</h1>
+					<dl>
+						<dt>배송 문의</dt>
+						<dd>주문 후 평균 2~3일 이내에 배송됩니다.</dd>
+
+						<dt>교환 문의</dt>
+						<dd>상품 수령 후 7일 이내에 교환이 가능합니다.</dd>
+
+						<dt>반품 문의</dt>
+						<dd>반품 신청은 배송 완료 후 7일 이내에 가능합니다.</dd>
+					</dl>
+				</div>
+				<div>
+					<h1 className='flex gap-2'>
+						<code className='code'>&lt;figure&gt;</code>
+						<code className='code'>&lt;figcaption&gt;</code>
+					</h1>
+					<figure>
+						<ChartComponent />
+						<figcaption>가짜 데이터로 만든 chart.js 바 차트</figcaption>
+					</figure>
+				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;pre&gt;</code>
+					</h1>
+					<pre>(╯°□°）╯︵ ┻━┻</pre>
+				</div>
+				<div>
+					<h1 className='flex gap-2'>
+						<code className='code'>&lt;datalist&gt;</code>
+						<code className='code'>&lt;fieldset&gt;</code>
+						<code className='code'>&lt;legend&gt;</code>
+					</h1>
+					<div></div>
 				</div>
 				<div>
 					<h1>
