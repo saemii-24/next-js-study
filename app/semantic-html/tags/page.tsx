@@ -104,6 +104,73 @@ export default function Tags() {
 					</h1>
 					<div></div>
 				</div>
+				<div>
+					<h1>
+						<code className='code'>&lt;wbr&gt;</code>
+					</h1>
+					<h3 className=' font-medium mb-2'>1. 아무 처리도 하지 않은 경우</h3>
+					<div className='border w-full border-gray-300 rounded-md p-2  overflow-auto whitespace-nowrap text-xs'>
+						https://www.example.com/averyverylongurlwithoutanybreakpointsoitwontwrapproperly
+					</div>
+
+					<h3 className=' font-medium mt-4 mb-2'>
+						2. Tailwind <code className='code'>break-words</code> 적용
+					</h3>
+					<div className='border border-gray-300 rounded-md p-2   break-words text-xs'>
+						https://www.example.com/averyverylongurlwithoutanybreakpointsoitwontwrapproperly
+					</div>
+
+					<h3 className=' font-medium mt-4 mb-2'>3. br 태그 사용</h3>
+					<div className='border w-full border-gray-300 rounded-md p-2  text-xs'>
+						https://www.example.com/
+						<br />
+						averyverylongurlwithoutanybreakpointsoitwontwrapproperly
+					</div>
+
+					<h3 className=' font-medium mt-4 mb-2'>4. wbr 태그 사용</h3>
+					<div className='border w-full border-gray-300 rounded-md p-2  text-xs'>
+						https://www.example.com/
+						<wbr />
+						avery
+						<wbr />
+						very
+						<wbr />
+						long
+						<wbr />
+						url
+						<wbr />
+						without
+						<wbr />
+						any
+						<wbr />
+						breakpoints
+						<wbr />
+						so
+						<wbr />
+						it
+						<wbr />
+						wont
+						<wbr />
+						wrap
+						<wbr />
+						properly
+					</div>
+				</div>
+				<div>
+					<h1>영화 검색 사이트</h1>
+					<search title='영화 검색'>
+						<form action='/search/'>
+							<label htmlFor='movie'>영화 검색</label>
+							<input type='search' id='movie' name='q' />
+							<button type='submit'>검색</button>
+						</form>
+					</search>
+					<h2>렌트 가능한 차량 목록</h2>
+					<search title='차량 검색'>
+						<h3>필터 결과</h3>
+						<input type='search' placeholder='차량 검색' />
+					</search>
+				</div>
 			</div>
 		</Container>
 	);
