@@ -21,7 +21,7 @@ ChartJS.register(
 	Legend,
 );
 
-export const options = {
+const options = {
 	responsive: true,
 	plugins: {
 		legend: {
@@ -36,7 +36,7 @@ export const options = {
 
 const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월'];
 
-export const data = {
+const data = {
 	labels,
 	datasets: [
 		{
