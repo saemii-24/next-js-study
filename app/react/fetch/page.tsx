@@ -1,83 +1,89 @@
-import { Suspense } from "react";
+// 'use client';
+import Container from '@/components/Container';
+import {Suspense, use, useEffect, useState} from 'react';
 
-type Product = {
-  id: number;
-  title: string;
+// function Fetch() {
+// 	// 로딩 여부 상태
+// 	const [isLoading, setIsLoading] = useState(true);
+// 	// 에러 여부 상태
+// 	const [isError, setIsError] = useState(false);
+// 	// 가져온 데이터 저장
+// 	const [data, setData] = useState();
+
+// 	const [refetch, setRefetch] = useState<boolean>(false);
+
+// 	// url이 바뀔 때마다 데이터 fetch
+// 	useEffect(() => {
+// 		setIsError(false); // 에러 상태 초기화
+// 		setIsLoading(true); // 로딩 시작
+// 		setData(undefined); // 이전 데이터 초기화
+
+// 		fetch('/api/use')
+// 			.then((res) => res.json()) // 응답을 JSON으로 파싱
+// 			.then(setData) // 데이터 저장
+// 			.catch(() => setIsError(true)) // 에러 발생 시 에러 상태 true
+// 			.finally(() => setIsLoading(false)); // 로딩 종료
+// 	}, [refetch]); // 의존성: url이 변경될 때마다 재실행
+
+// 	return (
+// 		<div>
+// 			<button
+// 				onClick={() => setRefetch(!refetch)}
+// 				className='py-2 text-center text-white bg-blue-500 cursor-pointer my-4 w-full rounded-md hover:bg-blue-600'>
+// 				데이터 불러오기
+// 			</button>
+
+// 			{isLoading ? (
+// 				<h1>fetch로 로딩중...</h1>
+// 			) : isError ? (
+// 				<h1>Error</h1>
+// 			) : (
+// 				<div className='space-y-4'>
+// 					{data?.map((item: any, index: number) => {
+// 						return (
+// 							<div key={index} className='border rounded-md p-4'>
+// 								<h3>{item.name}</h3>
+// 								<p>{item.age}</p>
+// 								<p>{item.address}</p>
+// 							</div>
+// 						);
+// 					})}
+// 				</div>
+// 			)}
+// 		</div>
+// 	);
+// }
+
+const Use = () => {
+	const data = use(
+		fetch('/api/use', {method: 'GET'}).then((res) => console.log(res)),
+	);
+
+	return (
+		<div>
+			{/* <div className='space-y-4'>
+				{data?.map((item: any, index: number) => {
+					return (
+						<div key={index} className='border rounded-md p-4'>
+							<h3>{item.name}</h3>
+							<p>{item.age}</p>
+							<p>{item.address}</p>
+						</div>
+					);
+				})}
+			</div> */}
+		</div>
+	);
 };
 
-
-// export default async function Page() {
-//   const res = await fetch('https://dummyjson.com/products',{
-//     cache: 'no-store'
-//   });
-//   if (!res.ok) throw new Error('Fetch 실패');
-//   const data = await res.json();
-
-//   return (
-//     <ul>
-//       {data.products.map((product: Product) => (
-//         <li key={product.id}>
-//           {product.id}: {product.title}
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
-
-// async function getProducts(): Promise<Product[]> {
-//   const res = await fetch('https://dummyjson.com/products', {
-//     cache: 'no-store',
-//   });
-//   if (!res.ok) throw new Error('Fetch 실패');
-//   const data = await res.json();
-//   return data.products;
-// }
-
-// export default async function Page() {
-//   const products = await getProducts();
-
-//   return (
-//     <ul>
-//       {products.map((product) => (
-//         <li key={product.id}>
-//           {product.id}: {product.title}
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
-
-export async function getProduct(id: number, delay = 0) {
-  await new Promise((res) => setTimeout(res, delay));
-  const res = await fetch(`https://dummyjson.com/products/${id}`);
-  if (!res.ok) throw new Error(`상품 ${id} 로딩 실패`);
-  return res.json();
-}
-
-export async function ProductItemAwait({ id, delay }: { id: number; delay?: number }) {
-  console.log(`🕒 ProductItemAwait ${id} 시작`);
-  const product = await getProduct(id, delay);
-  console.log(`✅ ProductItemAwait ${id} 완료`);
-  return <li>{product.id}: {product.title}</li>;
-}
-
-
-export default function Page() {
-  return (
-    <ul>
-      <Suspense fallback={<li>⌛ 첫 번째 로딩 중...</li>}>
-        <ProductItemAwait id={1} delay={2000} />
-      </Suspense>
-
-      <Suspense fallback={<li>⌛ 두 번째 로딩 중...</li>}>
-        <ProductItemAwait id={2} delay={1000} /> 
-      </Suspense>
-
-      <Suspense fallback={<li>⌛ 세 번째 로딩 중...</li>}>
-        <ProductItemAwait id={3} delay={2000}/>
-      </Suspense>
-    </ul>
-  );
+export default function FetchPage() {
+	return (
+		<Container>
+			<Container.Title>Fetch</Container.Title>
+			{/* <Fetch /> */}
+			<Suspense fallback={<div>use로 로딩중...</div>}>
+				<Use />
+			</Suspense>
+		</Container>
+	);
 }
