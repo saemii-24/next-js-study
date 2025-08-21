@@ -1,6 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
+import Image from 'next/image';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -15,5 +16,22 @@ export default function PokemonPage() {
 	if (error) return <div>에러 발생</div>;
 	if (!data) return null;
 
-	return <div></div>;
+	return (
+		<div className='h-screen w-screen items-center justify-center flex'>
+			<div className='flex flex-col items-center  border border-2xl p-4 rounded-2xl'>
+				<h1 className='font-bold'>{data.name}</h1>
+				<Image
+					src={data.sprites.front_default}
+					alt={data.name}
+					width={100}
+					height={200}
+				/>
+				<ul className='text-sm text-center'>
+					{data.abilities.map((item: any) => (
+						<li key={item.ability.name}>{item.ability.name}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	);
 }

@@ -8,6 +8,13 @@ module.exports = {
 				pathname: '/**',
 				search: '',
 			},
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+				port: '',
+				pathname: '/**',
+				search: '',
+			},
 		],
 	},
 };
