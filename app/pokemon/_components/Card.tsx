@@ -26,7 +26,7 @@ const gradientForColor = (color?: string): [string, string] => {
 		case 'yellow':
 			return ['#F59E0B', '#FEF3C7'];
 		case 'red':
-			return ['#F87171', '#FECACA'];
+			return ['#F87171', '#966969'];
 		case 'orange':
 			return ['#FB923C', '#FED7AA'];
 		case 'gray':
