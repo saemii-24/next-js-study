@@ -1,7 +1,4 @@
 module.exports = {
-	experimental: {
-		useCache: true,
-	},
 	cacheComponents: true,
 	images: {
 		remotePatterns: [
