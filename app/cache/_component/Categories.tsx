@@ -2,6 +2,9 @@ import Image from 'next/image';
 
 export default async function Categories() {
 	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
 	const data = await fetch(`${baseUrl}/api/category`, {cache: 'force-cache'});
 	const categories = await data.json();
 
