@@ -1,12 +1,17 @@
 import Image from 'next/image';
+import StarsCount from './StarsCount';
 
 export default async function Categories() {
 	const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+	await new Promise((resolve) => setTimeout(resolve, 2000));
+
 	const data = await fetch(`${baseUrl}/api/category`, {cache: 'force-cache'});
 	const categories = await data.json();
 
 	return (
 		<section className='bg-black text-white min-w-2/3'>
+			<StarsCount />
 			<div className='max-w-6xl mx-auto'>
 				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
 					{categories.map((category: any) => (
